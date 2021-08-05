@@ -10,14 +10,15 @@ const reset = document.getElementById('reset')
 // define more constants and variables here
 const defcolor = color.value
 const str = text.innerHTML
+let check = false;
 
 btn_toggle.onclick = () => {
-  if(btn_toggle.innerHTML === "Display Calculation"){
+  if(btn_toggle.innerHTML === "Show Calculation"){
     calculation.innerHTML = 630610765+parseInt(length.value)
-    btn_toggle.innerHTML = "Display Author"
+    btn_toggle.innerHTML = "Show Author"
     author.innerHTML = ""
   }else{
-    btn_toggle.innerHTML = "Display Calculation"
+    btn_toggle.innerHTML = "Show Calculation"
     author.innerHTML = "630610765 SUPARIDA SILPASITH"
     calculation.innerHTML = ""
   }
@@ -25,26 +26,34 @@ btn_toggle.onclick = () => {
 
 // more codes for Search and Reset buttons here
 
-search.onclick = () => {
-  
+const changeCallback = (ev) => {
+  if(check === true){
+  color.value = ev.target.value
   let textspan = ""
   const words = str.split(" ");
 
-  for (let i = 0; i < words.lengthlength; i++) {
-    let word = words[i];
-    let arr = []
-    for(let j = 0; j < words.lengthlength; j++)
-    if ((word[i][j].charCodeAt(0) >= 65 && iterator.charCodeAt(0) <= 90) || (word[i][j].charCodeAt(0) >= 97 && iterator.charCodeAt(0) <= 122)) {
-      let neww = ""
-      neww+= word[i][j]
-      arr.push()
-      continue
+  for(let i = 0; i < words.length; i++){
+    if(words[i].length > length.value){
+      words[i] = "<span style='color:"+ color.value + "'>" + words[i] + "</span>";
     }
   }
 
   for(let i = 0; i < words.length; i++){
+    textspan += words[i] + " ";
+  }
+
+    text.innerHTML = textspan;
+  }
+}
+
+search.onclick = () => {
+  check = true;
+  let textspan = ""
+  const words = str.split(" ");
+
+  for(let i = 0; i < words.length; i++){
     if(words[i].length > length.value){
-      words[i] = "<span style='color:"+ color.value+ "'>" + words[i] + "</span>";
+      words[i] = "<span style='color:"+ color.value + "'>" + words[i] + "</span>";
     }
   }
 
